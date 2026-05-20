@@ -5,56 +5,63 @@ import Contact from '@/components/Contact';
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div style={{ minHeight: '100vh' }}>
       <Header />
       <main>
         <Hero />
-        
+
         {/* About Section */}
-        <section id="about" className="py-24">
-          <div className="container grid grid-cols-2 gap-16 items-center lg:grid-cols-1">
-            <div className="relative">
-              <div className="aspect-square glass rounded-[40px] flex items-center justify-center p-12 overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient opacity-5"></div>
-                <div className="relative z-10">
-                   <h3 className="text-4xl font-bold mb-4">Innovation driven by <span className="text-gradient">passion.</span></h3>
-                   <p className="text-secondary text-lg leading-relaxed mb-6">
-                     I specialize in turning complex problems into elegant, user-centric digital experiences. With a deep focus on performance and scalability.
-                   </p>
-                   <div className="flex gap-4">
-                      <div className="p-4 glass rounded-2xl text-center flex-grow">
-                         <p className="text-2xl font-bold">5+</p>
-                         <p className="text-sm text-secondary uppercase">Apps</p>
-                      </div>
-                      <div className="p-4 glass rounded-2xl text-center flex-grow">
-                         <p className="text-2xl font-bold">AI</p>
-                         <p className="text-sm text-secondary uppercase">Specialist</p>
-                      </div>
-                   </div>
+        <section id="about" className="about">
+          <div className="container">
+            <div className="about-grid">
+              {/* Left card */}
+              <div className="about-card">
+                <div className="about-card-accent" />
+                <h3 className="about-card-title">
+                  Innovation driven by{' '}
+                  <span className="text-gradient">passion.</span>
+                </h3>
+                <p className="about-card-text">
+                  I specialize in turning complex problems into elegant,
+                  user-centric digital experiences. With a deep focus on
+                  performance and scalability.
+                </p>
+                <div className="about-mini-cards">
+                  <div className="about-mini-card">
+                    <p className="about-mini-card-value">5+</p>
+                    <p className="about-mini-card-label">Apps</p>
+                  </div>
+                  <div className="about-mini-card">
+                    <p className="about-mini-card-value">AI</p>
+                    <p className="about-mini-card-label">Specialist</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            <div>
-              <h2 className="text-4xl font-extrabold mb-8">My <span className="text-gradient">Tech Stack</span></h2>
-              <div className="grid grid-cols-2 gap-8 md:grid-cols-1">
-                <div className="space-y-4">
-                  <h4 className="font-bold text-lg mb-4">Frontend</h4>
-                  <ul className="text-secondary space-y-2">
-                    <li>Next.js / React</li>
-                    <li>TypeScript</li>
-                    <li>Vanilla CSS / Tailwind</li>
-                    <li>Framer Motion</li>
-                  </ul>
-                </div>
-                <div className="space-y-4">
-                  <h4 className="font-bold text-lg mb-4">Backend</h4>
-                  <ul className="text-secondary space-y-2">
-                    <li>Node.js / Express</li>
-                    <li>Python / FastAPI</li>
-                    <li>PostgreSQL / Supabase</li>
-                    <li>Firebase</li>
-                  </ul>
+
+              {/* Right: Stack */}
+              <div>
+                <h2 className="stack-section-title">
+                  My <span className="text-gradient">Tech Stack</span>
+                </h2>
+                <div className="stack-groups">
+                  <div>
+                    <p className="stack-group-label">Frontend</p>
+                    <ul className="stack-list">
+                      <li className="stack-item">Next.js / React</li>
+                      <li className="stack-item">TypeScript</li>
+                      <li className="stack-item">Vanilla CSS</li>
+                      <li className="stack-item">Framer Motion</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="stack-group-label">Backend</p>
+                    <ul className="stack-list">
+                      <li className="stack-item">Node.js / Express</li>
+                      <li className="stack-item">Python / FastAPI</li>
+                      <li className="stack-item">PostgreSQL / Supabase</li>
+                      <li className="stack-item">Firebase</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -65,14 +72,16 @@ export default function Home() {
         <Contact />
       </main>
 
-      <footer className="py-12 border-t border-surface-border">
-        <div className="container flex justify-between items-center flex-col-mobile gap-6">
-          <p className="text-secondary text-sm">
-            © {new Date().getFullYear()} Yer Perez. All rights reserved.
-          </p>
-          <div className="flex gap-8 text-sm font-medium text-secondary">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-inner">
+            <p className="footer-copy">
+              © {new Date().getFullYear()} Yer Pérez. All rights reserved.
+            </p>
+            <div className="footer-links">
+              <a href="#" className="footer-link">Privacy</a>
+              <a href="#" className="footer-link">Terms</a>
+            </div>
           </div>
         </div>
       </footer>
