@@ -524,6 +524,203 @@ h1, h2, h3, h4, h5 {
   50% { transform: translateY(-10px); }
 }
 
+/* ===================== 3D CARD TILT & PARALLAX EFFECT ===================== */
+.card-3d-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px; /* Crucial for 3D depth perception */
+}
+
+.card-3d {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(99, 102, 241, 0.15) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform-style: preserve-3d; /* Allows child items to float in 3D */
+  will-change: transform;
+  box-shadow: 0 35px 120px rgba(0, 0, 0, 0.6);
+}
+
+/* Backwards glowing aura behind the card */
+.card-3d-bg-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.45) 0%, rgba(168, 85, 247, 0.3) 50%, transparent 80%);
+  filter: blur(50px);
+  opacity: 1;
+  z-index: -1;
+  transform: translateZ(-20px); /* Pushes the glow behind the card plane */
+}
+
+/* Spot reflection/glare following the cursor */
+.card-3d-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Content wrapper */
+.card-3d-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  z-index: 2;
+  transform-style: preserve-3d;
+}
+
+/* Central Terminal Icon box (pops out visual depth) */
+.card-3d-icon-box {
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #080808;
+  box-shadow: 0 25px 50px rgba(99, 102, 241, 0.3);
+  transform: translateZ(60px); /* Deep Z translation */
+  transition: transform 0.3s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* Pulsing aura effect on hover inside the terminal icon */
+.card-3d-icon-box::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: calc(var(--radius-md) + 8px);
+  border: 2px dashed rgba(99, 102, 241, 0.4);
+  animation: rotate-dash 10s linear infinite;
+  transform: translateZ(-5px);
+}
+
+@keyframes rotate-dash {
+  to { transform: translateZ(-5px) rotate(360deg); }
+}
+
+/* Text elements (floating slightly above the card surface) */
+.card-3d-text-box {
+  transform: translateZ(40px); /* Moderately popped out */
+  transition: transform 0.3s ease-out;
+}
+
+.card-3d-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.card-3d-sub {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+}
+
+/* Floating outer badges */
+.card-3d-badge {
+  position: absolute;
+  z-index: 5;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+.card-3d-badge-1 {
+  top: -15px;
+  right: -15px;
+  transform: translateZ(90px); /* High Z height to exaggerate the 3D parallax */
+}
+
+.card-3d-badge-2 {
+  bottom: -15px;
+  left: -15px;
+  transform: translateZ(90px);
+}
+
+.card-3d-badge-inner {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(8, 8, 8, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  animation: float-3d 4s ease-in-out infinite;
+}
+
+.card-3d-badge-2 .card-3d-badge-inner {
+  animation-delay: 1.5s;
+}
+
+@keyframes float-3d {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+
+/* Constant Y-axis 360-degree rotation animation */
+.card-3d.constant-spin {
+  animation: spin-360 16s linear infinite;
+}
+
+.card-3d.constant-spin .card-3d-glare {
+  animation: spin-glare 16s linear infinite;
+}
+
+@keyframes spin-360 {
+  0% {
+    transform: perspective(1000px) rotateX(8deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(8deg) rotateY(360deg);
+  }
+}
+
+@keyframes spin-glare {
+  0% {
+    background: radial-gradient(circle 250px at 0% 50%, rgba(255, 255, 255, 0.15), transparent);
+    opacity: 0.8;
+  }
+  25% {
+    background: radial-gradient(circle 250px at 50% 50%, rgba(255, 255, 255, 0.15), transparent);
+    opacity: 0.4;
+  }
+  50% {
+    background: radial-gradient(circle 250px at 100% 50%, rgba(255, 255, 255, 0.15), transparent);
+    opacity: 0.8;
+  }
+  75% {
+    background: radial-gradient(circle 250px at 50% 50%, rgba(255, 255, 255, 0.15), transparent);
+    opacity: 0.4;
+  }
+  100% {
+    background: radial-gradient(circle 250px at 0% 50%, rgba(255, 255, 255, 0.15), transparent);
+    opacity: 0.8;
+  }
+}
+
 /* ===================== ABOUT ===================== */
 .about {
   padding: 8rem 0;

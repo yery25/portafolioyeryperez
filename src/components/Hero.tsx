@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowRight, Sparkles, Terminal, Code } from 'lucide-react';
+import ThreeDCard from './ThreeDCard';
 
 export default function Hero() {
   return (
@@ -56,28 +57,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Visual card */}
-          <div className="hero-visual">
-            <div className="hero-visual-glow" />
-
-            <div className="hero-visual-content">
-              <div className="hero-visual-icon-box">
-                <Terminal size={52} />
-              </div>
-              <div>
-                <p className="hero-visual-title">YP.SOFTWARE</p>
-                <p className="hero-visual-sub">Full Stack Wizardry</p>
-              </div>
-            </div>
-
-            {/* Floating badges */}
-            <div className="hero-float hero-float-1">
-              <Code size={22} style={{ color: 'var(--primary)' }} />
-            </div>
-            <div className="hero-float hero-float-2">
-              <Sparkles size={22} style={{ color: 'var(--accent)' }} />
-            </div>
-          </div>
+          {/* Visual card with 3D Tilt Parallax effect */}
+          <ThreeDCard />
         </div>
       </div>
     </section>
